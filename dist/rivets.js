@@ -412,9 +412,9 @@
         id = args.shift();
         formatter = this.view.formatters[id];
         if ((formatter != null ? formatter.read : void 0) instanceof Function) {
-          value = formatter.read.apply(formatter, [value].concat(__slice.call(args)));
+          value = formatter.read.apply(formatter, [value].concat(__slice.call(args), [this.view.models]));
         } else if (formatter instanceof Function) {
-          value = formatter.apply(null, [value].concat(__slice.call(args)));
+          value = formatter.apply(null, [value].concat(__slice.call(args), [this.view.models]));
         }
       }
       return value;
@@ -447,7 +447,7 @@
         args = formatter.split(/\s+/);
         id = args.shift();
         if ((_ref1 = this.view.formatters[id]) != null ? _ref1.publish : void 0) {
-          value = (_ref2 = this.view.formatters[id]).publish.apply(_ref2, [value].concat(__slice.call(args)));
+          value = (_ref2 = this.view.formatters[id]).publish.apply(_ref2, [value].concat(__slice.call(args), [this.view.models]));
         }
       }
       return this.view.adapters[this.key["interface"]].publish(this.model, this.key.path, value);
